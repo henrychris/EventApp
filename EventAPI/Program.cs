@@ -1,4 +1,7 @@
 
+using EventAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace EventAPI
 {
     public class Program
@@ -13,6 +16,8 @@ namespace EventAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<DataContext>(options => options.UseSqlite());
 
             var app = builder.Build();
 
