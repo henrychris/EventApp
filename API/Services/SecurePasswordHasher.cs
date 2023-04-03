@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using API.Interfaces;
+using Shared;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Shared
+namespace API.Services
 {
-    public class SecurePasswordHasher
+    public class SecurePasswordHasher : ISecurePasswordHasher
     {
+        // set these in appsettings
+        // refer to EP for how to categorise settings with classes
         const int _keySize = 64;
         const int _iterations = 350000;
         readonly HashAlgorithmName _hashAlgorithm = HashAlgorithmName.SHA512;
 
-        string HashPasword(string password, out byte[] salt)
+        public PasswordHash HashPasword(string password, out byte[] salt)
         {
             salt = RandomNumberGenerator.GetBytes(_keySize);
             var hash = Rfc2898DeriveBytes.Pbkdf2(
@@ -22,10 +22,15 @@ namespace Shared
                 _iterations,
                 _hashAlgorithm,
                 _keySize);
-            return Convert.ToHexString(hash);
+
+            return new PasswordHash
+            {
+                Hash = Convert.ToHexString(hash),
+                Salt = salt
+            };
         }
 
-        bool VerifyPassword(string password, string hash, byte[] salt)
+        public bool VerifyPassword(string password, string hash, byte[] salt)
         {
             var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password, salt, _iterations, _hashAlgorithm, _keySize);
 
