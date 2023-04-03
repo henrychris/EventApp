@@ -14,7 +14,6 @@ namespace Shared
         public decimal Price { get; set; }
         [Required]
         public DateTime Date { get; set; }
-        public bool IsAttending { get; set; } = false;
 
         // one event can have many users attending.
         // however, we shall simply maintain that as a count value.
