@@ -1,4 +1,6 @@
 
+using Microsoft.EntityFrameworkCore;
+
 namespace EventAPI
 {
     public class Program
@@ -14,6 +16,11 @@ namespace EventAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            #region My Services
+
+            builder.Services.AddDbContext<DataContext>(options => options.UseSqlite());
+
+            #endregion
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
