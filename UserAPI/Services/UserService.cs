@@ -24,7 +24,8 @@ namespace UserAPI.Services
         public async Task<bool> VerifyUserPasswordAsync(string email, string password)
         {
             var user = await _userRepo.GetUserByEmailAsync(email);
-            return _hasher.VerifyPassword(password, user.PasswordHash, user.PasswordSalt);
+            // passwordhash and salt will never be null when this function is called.
+            return _hasher.VerifyPassword(password, user?.PasswordHash!, user?.PasswordSalt!);
         }
     }
 }
