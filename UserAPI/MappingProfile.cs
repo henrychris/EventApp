@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ErrandPay_Test.Shared.DTOs;
 using Shared;
+using Shared.DTO;
 
 namespace UserAPI
 {

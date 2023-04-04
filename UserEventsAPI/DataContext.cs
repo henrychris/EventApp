@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shared;
 
-namespace UserAPI.Data
+namespace UserEventsAPI
 {
     public class DataContext : DbContext
     {
@@ -18,7 +18,6 @@ namespace UserAPI.Data
             options.UseSqlite(_configuration.GetConnectionString("SqlConnection"));
         }
 
-        public DbSet<User> Users { get; set; }
-
+        public DbSet<UserEvents> UserEvents { get; set; }
     }
 }

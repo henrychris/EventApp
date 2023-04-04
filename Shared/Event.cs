@@ -14,11 +14,5 @@ namespace Shared
         public decimal Price { get; set; }
         [Required]
         public DateTime Date { get; set; }
-
-        // one event can have many users attending.
-        // however, we shall simply maintain that as a count value.
-        // but, in reality, there should be a list of users attending.
-        // the count of this collection should give our answer
-        public virtual ICollection<User> AttendingUsers { get; set; } = new List<User>();
     }
 }
