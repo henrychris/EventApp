@@ -24,7 +24,5 @@ namespace Shared
         [JsonIgnore]
         public byte[] PasswordSalt { get; set; } = new byte[32];
         public decimal WalletBalance { get; set; } = 0;
-        // one user can join many events
-        public virtual ICollection<Event> AttendedEvents { get; set; } = new List<Event>();
     }
 }
