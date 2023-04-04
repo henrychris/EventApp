@@ -1,10 +1,9 @@
-
-using API.Data;
-using API.Interfaces;
-using API.Services;
 using Microsoft.EntityFrameworkCore;
+using UserAPI.Data;
+using UserAPI.Interfaces;
+using UserAPI.Services;
 
-namespace API
+namespace UserAPI
 {
     public class Program
     {

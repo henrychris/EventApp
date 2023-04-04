@@ -1,9 +1,9 @@
-﻿using API.Interfaces;
-using Shared;
+﻿using Shared;
 using System.Security.Cryptography;
 using System.Text;
+using UserAPI.Interfaces;
 
-namespace API.Services
+namespace UserAPI.Services
 {
     public class SecurePasswordHasher : ISecurePasswordHasher
     {

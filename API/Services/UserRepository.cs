@@ -1,9 +1,9 @@
-﻿using API.Data;
-using API.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Shared;
+using UserAPI.Data;
+using UserAPI.Interfaces;
 
-namespace API.Services
+namespace UserAPI.Services
 {
     public class UserRepository : IUserRepository
     {

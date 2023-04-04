@@ -1,8 +1,8 @@
-﻿using API.Interfaces;
-using Shared;
+﻿using Shared;
 using System.Text;
+using UserAPI.Interfaces;
 
-namespace API.Services
+namespace UserAPI.Services
 {
     public class UserService : IUserService
     {

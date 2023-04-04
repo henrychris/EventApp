@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shared;
 
-namespace API.Data
+namespace UserAPI.Data
 {
     public class DataContext : DbContext
     {

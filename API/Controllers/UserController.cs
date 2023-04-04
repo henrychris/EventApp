@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace UserAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

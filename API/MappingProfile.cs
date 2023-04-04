@@ -2,7 +2,7 @@
 using ErrandPay_Test.Shared.DTOs;
 using Shared;
 
-namespace API
+namespace UserAPI
 {
     public class MappingProfile : Profile
     {

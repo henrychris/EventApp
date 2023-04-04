@@ -1,6 +1,6 @@
 ﻿using Shared;
 
-namespace API.Interfaces
+namespace UserAPI.Interfaces
 {
     public interface IUserRepository
     {
