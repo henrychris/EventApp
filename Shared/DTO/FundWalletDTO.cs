@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ErrandPay_Test.Shared.DTOs
+namespace Shared.DTO
 {
     public class FundWalletDTO
     {

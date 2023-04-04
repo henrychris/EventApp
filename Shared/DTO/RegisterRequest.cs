@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ErrandPay_Test.Shared.DTOs
+namespace Shared.DTO
 {
     public class RegisterRequest
     {
