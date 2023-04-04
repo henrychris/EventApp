@@ -1,5 +1,7 @@
 
 using API.Data;
+using API.Interfaces;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -19,6 +21,12 @@ namespace API
 
             builder.Services.AddDbContext<DataContext>(options => options.UseSqlite());
 
+            #region Services
+
+            builder.Services.AddSingleton<ISecurePasswordHasher, SecurePasswordHasher>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            #endregion
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
