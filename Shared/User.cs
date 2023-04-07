@@ -13,7 +13,8 @@ namespace Shared
     {
         public static User NotFound = new() { };
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity), JsonIgnore]
+        [JsonIgnore]
+        // remember to generate GUID when creating user
         public int Id { get; set; }
         [Required]
         public string Name { get; set; } = string.Empty;
