@@ -5,6 +5,8 @@ namespace Shared
 {
     public class Event
     {
+        public static Event NotFound = new() { };
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
