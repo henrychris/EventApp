@@ -13,5 +13,13 @@ namespace EventAPI.Interfaces
         Task<Event> GetEventByNameAsync(string name);
         Task<bool> CheckIfEventExists(Event model);
         Task<List<Event>> GetAllEventsAsync();
+
+        /* TODO:
+         * Consider adding a method to the interface that allows you to 
+         * retrieve all events that match a given set of criteria. 
+         * This can be useful if you want to retrieve all events 
+         * that occurred in a particular year, or that have a '
+         * certain price range, for example.
+         */
     }
 }
