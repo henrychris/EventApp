@@ -27,7 +27,7 @@ namespace UserAPI.Services
                 await _dataContext.SaveChangesAsync();
                 return new ServiceResponse<User> { Message = "User Added.", Success = true, Data = user };
             }
-            else if (await CheckIfUserExistsAsync(user!.Email))
+            else if (await CheckIfUserExistsAsync(user!.Email) && user != null)
             {
                 return new ServiceResponse<User> { Message = "User already exists.", Success = false, Data = User.NotFound };
             }
@@ -58,8 +58,8 @@ namespace UserAPI.Services
             {
                 return new ServiceResponse<User> { Message = "Credit failed. User Not Found.", Success = false, Data = User.NotFound };
             }
-            // WHY?
-            else if (user.Name.Length < 1)
+            // The default, or NotFound user is an empty object.
+            else if (user == User.NotFound)
                 return new ServiceResponse<User> { Message = "User Not Found", Success = false, Data = User.NotFound };
 
             user.WalletBalance += amount;

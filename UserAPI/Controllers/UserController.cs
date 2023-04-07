@@ -7,5 +7,6 @@ namespace UserAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        //[HttpPost]
     }
 }
