@@ -8,8 +8,7 @@ namespace UserAPI
     {
         public MappingProfile()
         {
-            CreateMap<RegisterRequest, User>()
-                .ForMember(dest => dest.PasswordHash, act => act.MapFrom(src => src.Password));
+            CreateMap<RegisterRequest, User>();
         }
     }
 }
