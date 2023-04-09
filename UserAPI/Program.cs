@@ -22,9 +22,13 @@ namespace UserAPI
 
             #region Services
 
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddSingleton<ISecurePasswordHasher, SecurePasswordHasher>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            // TODO Add RBAC
+
             #endregion
             var app = builder.Build();
 
