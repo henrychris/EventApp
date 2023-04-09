@@ -7,7 +7,6 @@ namespace Shared
     {
         public static User NotFound = new() { };
 
-        [JsonIgnore]
         public string Id { get; set; } = Guid.NewGuid().ToString();
         [Required, MaxLength(50)]
         public string FirstName { get; set; } = string.Empty;
@@ -15,9 +14,7 @@ namespace Shared
         public string LastName { get; set; } = string.Empty;
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
-        [Required, JsonIgnore]
-        public string PasswordHash { get; set; } = string.Empty;
-        [JsonIgnore]
+        [Required] public string PasswordHash { get; set; } = string.Empty;
         public byte[] PasswordSalt { get; set; } = new byte[32];
         public decimal WalletBalance { get; set; } = 0;
         public string Role { get; set; } = Roles.User.ToString();

@@ -9,6 +9,7 @@ namespace UserAPI
         public MappingProfile()
         {
             CreateMap<RegisterRequest, User>();
+            CreateMap<User, AuthResponse>();
         }
     }
 }
