@@ -14,11 +14,10 @@ namespace Shared
         public static User NotFound = new() { };
 
         [JsonIgnore]
-        // remember to generate GUID when creating user
-        public string Id { get; set; }
-        [Required]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        [Required, MaxLength(50)]
         public string FirstName { get; set; } = string.Empty;
-        [Required]
+        [Required, MaxLength(50)]
         public string LastName { get; set; } = string.Empty;
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
