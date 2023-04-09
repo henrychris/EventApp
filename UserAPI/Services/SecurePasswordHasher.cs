@@ -13,9 +13,9 @@ namespace UserAPI.Services
         const int _iterations = 350000;
         readonly HashAlgorithmName _hashAlgorithm = HashAlgorithmName.SHA512;
 
-        public PasswordHash HashPasword(string password, out byte[] salt)
+        public PasswordHash HashPasword(string password)
         {
-            salt = RandomNumberGenerator.GetBytes(_keySize);
+            var salt = RandomNumberGenerator.GetBytes(_keySize);
             var hash = Rfc2898DeriveBytes.Pbkdf2(
                 Encoding.UTF8.GetBytes(password),
                 salt,
