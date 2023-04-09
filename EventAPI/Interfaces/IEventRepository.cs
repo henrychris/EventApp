@@ -20,6 +20,7 @@ namespace EventAPI.Interfaces
          * This can be useful if you want to retrieve all events 
          * that occurred in a particular year, or that have a '
          * certain price range, for example.
+         * Would be the GetEvent method, with more properties.
          */
     }
 }
