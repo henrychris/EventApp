@@ -1,6 +1,4 @@
-﻿using Shared;
-
-namespace UserAPI.Interfaces
+﻿namespace UserAPI.Interfaces
 {
     public interface IUserService
     {

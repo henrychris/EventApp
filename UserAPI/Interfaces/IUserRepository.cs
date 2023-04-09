@@ -6,9 +6,9 @@ namespace UserAPI.Interfaces
     {
         Task<ServiceResponse<User>> AddUserAsync(User user);
         Task<bool> CheckIfUserExistsAsync(string email);
-        Task<User> GetUserAsync(int userId);
+        Task<User> GetUserAsync(string userId);
         Task<User?> GetUserByEmailAsync(string email);
-        ICollection<Event> GetEventsUserIsAttending(int userId);
-        Task<ServiceResponse<User>> FundWalletAsync(int userId, decimal amount);
+        ICollection<Event> GetEventsUserIsAttending(string userId);
+        Task<ServiceResponse<User>> FundWalletAsync(string userId, decimal amount);
     }
 }

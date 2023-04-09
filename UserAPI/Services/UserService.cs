@@ -1,6 +1,4 @@
-﻿using Shared;
-using System.Text;
-using UserAPI.Interfaces;
+﻿using UserAPI.Interfaces;
 
 namespace UserAPI.Services
 {

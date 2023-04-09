@@ -1,5 +1,4 @@
 ﻿using Shared;
-using Shared.DTO;
 
 namespace EventAPI.Interfaces
 {

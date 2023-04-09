@@ -1,7 +1,6 @@
 ﻿using EventAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Shared;
-using Shared.DTO;
 
 namespace EventAPI.Services
 {
