@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using Shared;
 using Shared.DTO;
-using System.Security.Claims;
-using System.Security.Cryptography.Xml;
 using UserAPI.Interfaces;
 
 namespace UserAPI.Services

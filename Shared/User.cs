@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace Shared
 {
@@ -14,7 +13,8 @@ namespace Shared
         public string LastName { get; set; } = string.Empty;
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
-        [Required] public string PasswordHash { get; set; } = string.Empty;
+        [Required] 
+        public string PasswordHash { get; set; } = string.Empty;
         public byte[] PasswordSalt { get; set; } = new byte[32];
         public decimal WalletBalance { get; set; } = 0;
         public string Role { get; set; } = Roles.User.ToString();
