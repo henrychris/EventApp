@@ -50,7 +50,7 @@ namespace UserAPI.Services
         /// <param name="userId"></param>
         /// <param name="amount"></param>
         /// <returns>Returns user details in response.</returns>
-        public async Task<ServiceResponse<User>> FundWalletAsync(int userId, decimal amount)
+        public async Task<ServiceResponse<User>> FundWalletAsync(string userId, decimal amount)
         {
             var user = await GetUserAsync(userId);
 
@@ -79,7 +79,7 @@ namespace UserAPI.Services
         /// <param name="userId"></param>
         /// <returns>An ICollection of Event type.</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public ICollection<Event> GetEventsUserIsAttending(int userId)
+        public ICollection<Event> GetEventsUserIsAttending(string userId)
         {
             throw new NotImplementedException();
         }
@@ -89,7 +89,7 @@ namespace UserAPI.Services
         /// </summary>
         /// <param name="userId"></param>
         /// <returns>Returns user details if found, else returns default user</returns>
-        public async Task<User> GetUserAsync(int userId)
+        public async Task<User> GetUserAsync(string userId)
         {
             return await _dataContext.Users.FirstOrDefaultAsync(c => c.Id == userId) ?? User.NotFound;
         }
