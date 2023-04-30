@@ -8,11 +8,11 @@ namespace EventAPI.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        private readonly IEventRepository _eventRepo
+        private readonly IEventRepository _eventRepo;
 
         public EventController(IEventRepository eventRepo)
         {
-            _eventRepo = eventRepo
+            _eventRepo = eventRepo;
         }
 
         [HttpGet("GetAllEvents")]
