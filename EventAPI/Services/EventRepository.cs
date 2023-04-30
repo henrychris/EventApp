@@ -26,7 +26,7 @@ namespace EventAPI.Services
                 await _dataContext.SaveChangesAsync();
                 return new ServiceResponse<Event> { Message = "Event Added.", Success = true, Data = model };
             }
-            else if (model != null && await CheckIfEventExists(model))
+            else if (model != null && await CheckIfEventExists(model.Id))
             {
                 return new ServiceResponse<Event> { Message = "Event already exists.", Success = false, Data = Event.NotFound };
             }
@@ -38,14 +38,9 @@ namespace EventAPI.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> CheckIfEventExists(Event model)
+        public async Task<bool> CheckIfEventExists(int id)
         {
-            if (model != null)
-            {
-                return await _dataContext.Events.AnyAsync(e => e.Id == model.Id || e.Name == model.Name);
-            }
-            // if its null, we ain't finding that event.
-            return false;
+            return await _dataContext.Events.AnyAsync(e => e.Id == id);
         }
 
         /// <summary>
@@ -55,7 +50,7 @@ namespace EventAPI.Services
         /// <returns></returns>
         public async Task<ServiceResponse<Event>> DeleteEventAsync(Event model)
         {
-            var modelToDelete = await _dataContext.Events.FirstOrDefaultAsync(e => e.Id == model.Id);
+            var modelToDelete = await GetEventByIdAsync(model.Id);
             if (modelToDelete != null)
             {
                 _dataContext.Events.Remove(modelToDelete);
@@ -76,17 +71,19 @@ namespace EventAPI.Services
 
         /// <summary>
         /// Get an event from the DB. Using either Id or Name.
+        /// This finds events whose names have the same characters.
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<Event> GetEvent(int id, string name = "")
+        public async Task<List<Event>> GetEvent(int id, string name = "")
         {
-            var eventModel = await _dataContext.Events.FirstOrDefaultAsync(e => e.Id == id || e.Name == name);
-            if (eventModel != null)
+            var eventList = await _dataContext.Events.Where(e => e.Id == id || e.Name.ToLower()
+                                                                                     .Contains(name.ToLower())).ToListAsync();
+            if (eventList != null)
             {
-                return eventModel;
+                return eventList;
             }
-            return Event.NotFound;
+            return new List<Event>();
         }
 
         /// <summary>
@@ -106,18 +103,21 @@ namespace EventAPI.Services
 
         /// <summary>
         /// Gets an event from the DB, using the name.
+        /// Returns as many events with that name.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<Event> GetEventByNameAsync(string name)
+        public async Task<List<Event>> GetEventByNameAsync(string name)
         {
             // TODO adjust to be used for search
-            var eventModel = await _dataContext.Events.FirstOrDefaultAsync(e => e.Name == name);
+            // i.e there are different parameters to search by.
+            var eventModel = await _dataContext.Events.Where(e => e.Name.ToLower()
+                                                                        .Contains(name.ToLower())).ToListAsync();
             if (eventModel != null)
             {
                 return eventModel;
             }
-            return Event.NotFound;
+            return new List<Event>();
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace EventAPI.Services
         /// <returns></returns>
         public async Task<ServiceResponse<Event>> UpdateEventAsync(EventDTO model)
         {
-            var eventModel = await GetEvent(model.Id, model.Name);
+            var eventModel = await GetEventByIdAsync(model.Id);
 
             if (eventModel == Event.NotFound || eventModel == null)
             {

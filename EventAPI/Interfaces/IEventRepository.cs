@@ -7,10 +7,10 @@ namespace EventAPI.Interfaces
         Task<ServiceResponse<Event>> AddEventAsync(Event model);
         Task<ServiceResponse<Event>> UpdateEventAsync(EventDTO model);
         Task<ServiceResponse<Event>> DeleteEventAsync(Event model);
-        Task<Event> GetEvent(int id, string name = "");
+        Task<List<Event>> GetEvent(int id, string name = "");
         Task<Event> GetEventByIdAsync(int id);
-        Task<Event> GetEventByNameAsync(string name);
-        Task<bool> CheckIfEventExists(Event model);
+        Task<List<Event>> GetEventByNameAsync(string name);
+        Task<bool> CheckIfEventExists(int id);
         Task<List<Event>> GetAllEventsAsync();
 
         /* TODO:
