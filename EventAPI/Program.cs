@@ -2,6 +2,7 @@
 using EventAPI.Interfaces;
 using EventAPI.Services;
 using Microsoft.EntityFrameworkCore;
+using NLog;
 using Shared;
 
 namespace EventAPI
@@ -14,9 +15,11 @@ namespace EventAPI
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false)
                 .Build();
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
             // Add services to the container.
 
+            builder.Services.AddSingleton<ILoggerManager, LoggerService>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

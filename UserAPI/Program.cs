@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using NLog;
+using Shared;
 using UserAPI.Data;
 using UserAPI.Interfaces;
 using UserAPI.Services;
@@ -10,9 +12,14 @@ namespace UserAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false)
+                .Build();
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
             // Add services to the container.
 
+            builder.Services.AddSingleton<ILoggerManager, LoggerService>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
