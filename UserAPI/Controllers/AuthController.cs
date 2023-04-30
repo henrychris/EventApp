@@ -35,7 +35,7 @@ namespace UserAPI.Controllers
 
                 if (result.Success)
                 {
-                    return Ok($"Status: {result.Success}.\nMessage: {result.Message}\nData: {JsonConvert.SerializeObject(result)}.");
+                    return Ok($"Status: {result.Success}.\nMessage: {result.Message}\nData: {result}.");
                 }
                 return BadRequest($"Status: {result.Success}.\nMessage: {result.Message}\n");
             }

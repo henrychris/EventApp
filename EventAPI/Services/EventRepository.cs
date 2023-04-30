@@ -70,23 +70,6 @@ namespace EventAPI.Services
         }
 
         /// <summary>
-        /// Get an event from the DB. Using either Id or Name.
-        /// This finds events whose names have the same characters.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public async Task<List<Event>> GetEvent(int id, string name = "")
-        {
-            var eventList = await _dataContext.Events.Where(e => e.Id == id || e.Name.ToLower()
-                                                                                     .Contains(name.ToLower())).ToListAsync();
-            if (eventList != null)
-            {
-                return eventList;
-            }
-            return new List<Event>();
-        }
-
-        /// <summary>
         /// Gets an event from the DB, using the event ID.
         /// </summary>
         /// <param name="id"></param>

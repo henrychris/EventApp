@@ -7,7 +7,6 @@ namespace EventAPI.Interfaces
         Task<ServiceResponse<Event>> AddEventAsync(Event model);
         Task<ServiceResponse<Event>> UpdateEventAsync(EventDTO model);
         Task<ServiceResponse<Event>> DeleteEventAsync(Event model);
-        Task<List<Event>> GetEvent(int id, string name = "");
         Task<Event> GetEventByIdAsync(int id);
         Task<List<Event>> GetEventByNameAsync(string name);
         Task<bool> CheckIfEventExists(int id);
@@ -19,7 +18,7 @@ namespace EventAPI.Interfaces
          * This can be useful if you want to retrieve all events 
          * that occurred in a particular year, or that have a '
          * certain price range, for example.
-         * Would be the GetEvent method, with more properties.
+         * Would be the GetEventByName method, with more properties.
          */
     }
 }
