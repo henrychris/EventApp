@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Shared;
 
 namespace EventAPI
 {
@@ -8,6 +9,9 @@ namespace EventAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false)
+                .Build();
 
             // Add services to the container.
 
@@ -18,6 +22,7 @@ namespace EventAPI
 
             #region My Services
 
+            builder.Services.Configure<AppSettings>(config.GetSection("AppSettings"));
             builder.Services.AddDbContext<DataContext>(options => options.UseSqlite());
 
             #endregion
