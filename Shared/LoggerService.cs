@@ -17,7 +17,7 @@ namespace Shared
 
         public void LogError(string message, string stackTrace)
         {
-            var loggedMessage = $"Error Message: {message}.\nStack Trace: {stackTrace}";
+            var loggedMessage = $"{message}.\nStack Trace: {stackTrace}";
             logger.Error(loggedMessage);
         }
 
