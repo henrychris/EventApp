@@ -25,6 +25,10 @@ namespace EventAPI
             builder.Services.Configure<AppSettings>(config.GetSection("AppSettings"));
             builder.Services.AddDbContext<DataContext>(options => options.UseSqlite());
 
+            // seed db using onModelCreating
+            using var context = new DataContext(config);
+            context.Database.EnsureCreated();
+
             #endregion
             var app = builder.Build();
 
