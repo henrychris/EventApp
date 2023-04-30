@@ -12,10 +12,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventAPI", "EventAPI\EventA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserAPI", "UserAPI\UserAPI.csproj", "{6C2EBFCB-3A40-4E1A-9C63-711884944EF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserEventsAPI", "UserEventsAPI\UserEventsAPI.csproj", "{B9D1DDB4-BD99-4566-B0D8-054A6F8670C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserEventsAPI", "UserEventsAPI\UserEventsAPI.csproj", "{B9D1DDB4-BD99-4566-B0D8-054A6F8670C8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{90E894E3-EF4A-4E75-BD58-4F367C38DFCE} = {90E894E3-EF4A-4E75-BD58-4F367C38DFCE}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{54532532-FF2C-4D22-BA77-CDDEA5014A5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAPI-Tests", "EventAPI-Tests\EventAPI-Tests.csproj", "{8D0E6A56-E417-4FC4-B279-292782197B90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{B9D1DDB4-BD99-4566-B0D8-054A6F8670C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9D1DDB4-BD99-4566-B0D8-054A6F8670C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9D1DDB4-BD99-4566-B0D8-054A6F8670C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D0E6A56-E417-4FC4-B279-292782197B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D0E6A56-E417-4FC4-B279-292782197B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D0E6A56-E417-4FC4-B279-292782197B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D0E6A56-E417-4FC4-B279-292782197B90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D0E6A56-E417-4FC4-B279-292782197B90} = {54532532-FF2C-4D22-BA77-CDDEA5014A5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CBF4FF8-EB40-481F-8380-4C24EE3A56D2}
