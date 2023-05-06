@@ -21,58 +21,41 @@ namespace UserAPI.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    var errMessage = string.Join(" | ", ModelState.Values
-                                            .SelectMany(v => v.Errors)
-                                            .Select(e => e.ErrorMessage));
-                    return BadRequest(errMessage);
-                }
-
-                var result = await _authService.RegisterAsync(request);
-
-                if (result.Success)
-                {
-                    return Ok($"Status: {result.Success}.\nMessage: {result.Message}\nData: {result}.");
-                }
-                return BadRequest($"Status: {result.Success}.\nMessage: {result.Message}\n");
+                var errMessage = string.Join(" | ", ModelState.Values
+                                        .SelectMany(v => v.Errors)
+                                        .Select(e => e.ErrorMessage));
+                return BadRequest(errMessage);
             }
-            catch (Exception ex)
+
+            var result = await _authService.RegisterAsync(request);
+            if (result.Success)
             {
-                var errMessage = string.Concat($"Message: {ex.Message}", "\n", $"Stack Trace: {ex.StackTrace}");
-                return BadRequest($"Error: {errMessage}");
+                return Ok($"Status: {result.Success}.\nMessage: {result.Message}\nData: {result}.");
             }
+            return BadRequest($"Status: {result.Success}.\nMessage: {result.Message}\n");
         }
 
         [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    var errMessage = string.Join(" | ", ModelState.Values
-                                            .SelectMany(v => v.Errors)
-                                            .Select(e => e.ErrorMessage));
-                    return BadRequest(errMessage);
-                }
-
-                var result = await _authService.LoginAsync(request);
-
-                if (result.Success)
-                {
-                    return Ok($"Status: {result.Success}.\nMessage: {result.Message}\nData: {JsonConvert.SerializeObject(result)}.");
-                }
-                return BadRequest($"Status: {result.Success}.\nMessage: {result.Message}\n");
+                var errMessage = string.Join(" | ", ModelState.Values
+                                        .SelectMany(v => v.Errors)
+                                        .Select(e => e.ErrorMessage));
+                return BadRequest(errMessage);
             }
-            catch (Exception ex)
+
+            var result = await _authService.LoginAsync(request);
+            if (result.Success)
             {
-                var errMessage = string.Concat($"Message: {ex.Message}", "\n", $"Stack Trace: {ex.StackTrace}");
-                return BadRequest($"Error: {errMessage}");
+                return Ok($"Status: {result.Success}.\nMessage: {result.Message}\nData: {result}.");
             }
+            return Unauthorized($"Status: {result.Success}.\nMessage: {result.Message}\n");
+
         }
     }
 }
