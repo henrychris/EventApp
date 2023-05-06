@@ -18,7 +18,23 @@ namespace UserAPI.Data
             options.UseSqlite(_configuration.GetConnectionString("SqlConnection"));
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>().HasData
+                (new Role
+                {
+                    Id = 1,
+                    Name = RoleEnum.Admin.ToString()
+                },
+                new Role
+                {
+                    Id = 2,
+                    Name = RoleEnum.User.ToString()
+                });
+        }
+
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
     }
 }
