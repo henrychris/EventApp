@@ -17,6 +17,6 @@ namespace Shared
         public string PasswordHash { get; set; } = string.Empty;
         public byte[] PasswordSalt { get; set; } = new byte[32];
         public decimal WalletBalance { get; set; } = 0;
-        public string Role { get; set; } = Roles.User.ToString();
+        public string Role { get; set; } = RoleEnum.User.ToString();
     }
 }
