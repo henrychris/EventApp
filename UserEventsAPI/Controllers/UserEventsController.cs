@@ -18,7 +18,7 @@ namespace UserEventsAPI.Controllers
         {
             // receive object in format above and add to DB.
 
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

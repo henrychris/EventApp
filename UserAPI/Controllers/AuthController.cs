@@ -32,9 +32,9 @@ namespace UserAPI.Controllers
             var result = await _authService.RegisterAsync(request);
             if (result.Success)
             {
-                return Ok($"Status: {result.Success}.\nMessage: {result.Message}\nData: {result}.");
+                return Ok(result);
             }
-            return BadRequest($"Status: {result.Success}.\nMessage: {result.Message}\n");
+            return BadRequest(result);
         }
 
         [AllowAnonymous]
@@ -52,9 +52,9 @@ namespace UserAPI.Controllers
             var result = await _authService.LoginAsync(request);
             if (result.Success)
             {
-                return Ok($"Status: {result.Success}.\nMessage: {result.Message}\nData: {result}.");
+                return Ok(result);
             }
-            return Unauthorized($"Status: {result.Success}.\nMessage: {result.Message}\n");
+            return Unauthorized(result);
 
         }
     }
