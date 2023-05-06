@@ -1,0 +1,8 @@
+﻿namespace EventAPI
+{
+    public class AppSettings
+    {
+        public string Secret { get; set; } = string.Empty;
+        public string UserEventsUrl { get; set; } = string.Empty;
+    }
+}

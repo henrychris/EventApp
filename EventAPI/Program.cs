@@ -1,9 +1,11 @@
-
 using EventAPI.Interfaces;
 using EventAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using NLog;
 using Shared;
+using System.Text;
 
 namespace EventAPI
 {
@@ -26,8 +28,8 @@ namespace EventAPI
             builder.Services.AddSwaggerGen();
 
             #region My Services
-
-            builder.Services.Configure<AppSettings>(config.GetSection("AppSettings"));
+            // settings
+            var settings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>();
 
             // Add and seed DB
             builder.Services.AddDbContext<DataContext>(options => options.UseSqlite());
@@ -37,6 +39,24 @@ namespace EventAPI
             // other services
             builder.Services.AddScoped<IEventRepository, EventRepository>();
 
+            builder.Services.AddAuthentication(x =>
+            {
+                // need to understand how this works
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    // issuer signing key uses the same secret to decrypt the token
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(settings!.Secret)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
             #endregion
             var app = builder.Build();
 
