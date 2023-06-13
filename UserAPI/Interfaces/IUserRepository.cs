@@ -1,8 +1,11 @@
 ﻿using Shared;
+using Shared.Repository;
+using Shared.ResponseModels;
+using UserAPI.Data;
 
 namespace UserAPI.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IGenericRepository<User>
     {
         Task<ServiceResponse<User>> AddUserAsync(User user);
         Task<bool> CheckIfUserExistsAsync(string email);

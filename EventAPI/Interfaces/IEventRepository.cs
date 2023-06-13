@@ -1,8 +1,10 @@
 ﻿using Shared;
+using Shared.Repository;
+using Shared.ResponseModels;
 
 namespace EventAPI.Interfaces
 {
-    public interface IEventRepository
+    public interface IEventRepository : IGenericRepository<Event>
     {
         Task<ServiceResponse<Event>> AddEventAsync(Event model);
         Task<ServiceResponse<Event>> UpdateEventAsync(EventDTO model);

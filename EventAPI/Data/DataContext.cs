@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shared;
 
-namespace EventAPI
+namespace EventAPI.Data
 {
     public class DataContext : DbContext
     {

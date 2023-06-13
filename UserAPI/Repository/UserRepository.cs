@@ -1,17 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shared;
+using Shared.ResponseModels;
 using UserAPI.Data;
 using UserAPI.Interfaces;
 
-namespace UserAPI.Services
+namespace UserAPI.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
         private readonly DataContext _dataContext;
 
-        public UserRepository(DataContext dataContext)
+        public UserRepository(DataContext dataContext) : base(dataContext)
         {
-            _dataContext = dataContext;
         }
 
         /// <summary>

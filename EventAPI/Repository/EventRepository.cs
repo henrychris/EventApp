@@ -1,16 +1,17 @@
-﻿using EventAPI.Interfaces;
+﻿using EventAPI.Data;
+using EventAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Shared;
+using Shared.ResponseModels;
 
-namespace EventAPI.Services
+namespace EventAPI.Repository
 {
-    public class EventRepository : IEventRepository
+    public class EventRepository : GenericRepository<Event>, IEventRepository
     {
         private readonly DataContext _dataContext;
 
-        public EventRepository(DataContext dataContext)
+        public EventRepository(DataContext dataContext) : base(dataContext)
         {
-            _dataContext = dataContext;
         }
 
         /// <summary>
