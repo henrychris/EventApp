@@ -4,8 +4,8 @@ namespace Shared.Repository
 {
     public interface IGenericRepository<T> where T : class
     {
-        T GetById(int id);
-        Task<T> GetByIdAsync(int id);
+        T GetById(string id);
+        Task<T> GetByIdAsync(string id);
         IEnumerable<T> GetAll();
         Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);

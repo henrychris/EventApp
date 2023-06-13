@@ -52,12 +52,12 @@ namespace UserAPI.Repository
             return await _context.Set<T>().ToListAsync();
         }
 
-        public T GetById(int id)
+        public T GetById(string id)
         {
             return _context.Set<T>().Find(id);
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(string id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
