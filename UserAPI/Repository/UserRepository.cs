@@ -45,5 +45,19 @@ namespace UserAPI.Repository
         {
             return await _dataContext.Users.FirstOrDefaultAsync(c => c.Email == email) ?? User.NotFound;
         }
+
+        public new async Task<IEnumerable<object>> GetAllAsync()
+        {
+            var users = await _context.Set<User>().Select(u => new 
+            {
+                u.FirstName,
+                u.LastName,
+                u.Email,
+                u.WalletBalance,
+                u.Role
+            }).ToListAsync();
+
+            return users;
+        }
     }
 }

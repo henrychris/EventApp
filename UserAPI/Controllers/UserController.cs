@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UserAPI.Interfaces;
 
 namespace UserAPI.Controllers
 {
@@ -6,6 +7,19 @@ namespace UserAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        //[HttpPost]
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
+
+        public UserController(IUnitOfWork unitOfWork, IUserService userService)
+        {
+            _unitOfWork = unitOfWork;
+            _userService = userService;
+        }
+
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            return Ok(await _unitOfWork.Users.GetAllAsync());
+        }
     }
 }
