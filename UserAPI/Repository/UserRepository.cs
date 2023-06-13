@@ -36,16 +36,6 @@ namespace UserAPI.Repository
         }
 
         /// <summary>
-        /// Get a user using the user's ID.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns>Returns user details if found, else returns default user</returns>
-        public async Task<User> GetUserAsync(string userId)
-        {
-            return await _dataContext.Users.FirstOrDefaultAsync(c => c.Id == userId) ?? User.NotFound;
-        }
-
-        /// <summary>
         /// Using their email address, fetch a user's details.
         /// </summary>
         /// <param name="email"></param>
