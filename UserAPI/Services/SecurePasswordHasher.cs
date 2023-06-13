@@ -32,6 +32,8 @@ namespace UserAPI.Services
 
         public bool VerifyPassword(string password, string hash, byte[] salt)
         {
+            if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(hash) || salt == null)
+                return false;
             var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password, salt, _iterations, _hashAlgorithm, _keySize);
 
             return hashToCompare.SequenceEqual(Convert.FromBase64String(hash));
