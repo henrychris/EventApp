@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shared;
-using Shared.ResponseModels;
 using UserAPI.Data;
 using UserAPI.Interfaces;
 

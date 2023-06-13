@@ -1,7 +1,5 @@
 ﻿using Shared;
 using Shared.Repository;
-using Shared.ResponseModels;
-using UserAPI.Data;
 
 namespace UserAPI.Interfaces
 {
