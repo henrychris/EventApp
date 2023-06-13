@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /EventAPI/internal_logs
 /UserDB.session.sql
+/UserAPI/internal_logs/internallog.txt

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Shared.DTO;
+using Shared.RequestModels;
 using UserAPI.Interfaces;
 
 namespace UserAPI.Controllers

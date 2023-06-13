@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
 using Shared;
+using Shared.Repository;
 using System.Text;
 using UserAPI.Data;
 using UserAPI.Interfaces;
+using UserAPI.Repository;
 using UserAPI.Services;
 
 namespace UserAPI
@@ -39,6 +41,8 @@ namespace UserAPI
             builder.Services.AddSingleton<ISecurePasswordHasher, SecurePasswordHasher>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddSingleton<IJwtManager>(x => new JwtManager(settings!.Secret));
             

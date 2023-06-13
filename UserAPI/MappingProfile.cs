@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Shared;
-using Shared.DTO;
+using Shared.RequestModels;
+using Shared.ResponseModels;
 
 namespace UserAPI
 {
