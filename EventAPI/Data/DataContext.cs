@@ -22,7 +22,7 @@ namespace EventAPI.Data
                 (
                 new Event
                 {
-                    Id = 1,
+                    Id = "ba0331a0-c649-4fab-9636-7fb4bbfcf396",
                     Name = "Summer Music Festival",
                     Description = "Join us for a day of live music and fun in the sun!",
                     Price = 50.00m,
@@ -30,7 +30,7 @@ namespace EventAPI.Data
                 },
                 new Event
                 {
-                    Id = 2,
+                    Id = "03a5c81c-dc40-40b8-aa7a-1a2dff92ad67",
                     Name = "Summer Music Fest",
                     Description = "Join us for a day of live music and fun in the sun!",
                     Price = 45.00m,
@@ -38,7 +38,7 @@ namespace EventAPI.Data
                 },
                 new Event
                 {
-                    Id = 3,
+                    Id = "61c904c7-fdb2-4f56-859e-e6a5151af515",
                     Name = "Summer Music Concert",
                     Description = "Join us for a night of live music and fun under the stars!",
                     Price = 55.00m,
