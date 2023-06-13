@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shared
 {
@@ -7,8 +6,7 @@ namespace Shared
     {
         public static Event NotFound = new() { };
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         [Required]
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -29,9 +27,16 @@ namespace Shared
         public DateTime EventDate { get; set; }
         public string UserEmail { get; set; } = string.Empty;
     }
-    public class EventDTO
+    public class EventUpdateDTO
     {
-        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public decimal? Price { get; set; }
+        public DateTime? Date { get; set; }
+    }
+
+    public class CreateEventDTO
+    {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }

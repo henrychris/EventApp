@@ -1,18 +1,12 @@
 ﻿using Shared;
 using Shared.Repository;
-using Shared.ResponseModels;
 
 namespace EventAPI.Interfaces
 {
     public interface IEventRepository : IGenericRepository<Event>
     {
-        Task<ServiceResponse<Event>> AddEventAsync(Event model);
-        Task<ServiceResponse<Event>> UpdateEventAsync(EventDTO model);
-        Task<ServiceResponse<Event>> DeleteEventAsync(Event model);
-        Task<Event> GetEventByIdAsync(int id);
         Task<List<Event>> GetEventByNameAsync(string name);
-        Task<bool> CheckIfEventExists(int id);
-        Task<List<Event>> GetAllEventsAsync();
+        Task<bool> CheckIfEventExists(string id);
 
         /* TODO:
          * Consider adding a method to the interface that allows you to 

@@ -1,6 +1,5 @@
 ﻿using EventAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Shared;
 
 namespace EventAPI.Controllers
 {
@@ -8,36 +7,34 @@ namespace EventAPI.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        private readonly IEventRepository _eventRepo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EventController(IEventRepository eventRepo)
+        public EventController(IUnitOfWork unitOfWork)
         {
-            _eventRepo = eventRepo;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet("GetAllEvents")]
         public async Task<IActionResult> GetAllEvents()
         {
-            return Ok(await _eventRepo.GetAllEventsAsync());
+            return Ok(await _unitOfWork.Events.GetAllAsync());
         }
 
         [HttpGet("GetEventById")]
-        public async Task<IActionResult> GetEventById(int id)
+        public async Task<IActionResult> GetEventById(string id)
         {
-            var eventModel = await _eventRepo.GetEventByIdAsync(id);
+            var eventModel = await _unitOfWork.Events.GetByIdAsync(id);
 
-            if (eventModel == Event.NotFound)
-            {
-                // TODO add logging at some point
-                return BadRequest(Event.NotFound);
-            }
+            if (eventModel == null)
+                return NotFound(null);
+
             return Ok(eventModel);
         }
 
         [HttpGet("GetEventByName")]
         public async Task<IActionResult> GetEventByName(string name)
         {
-            var eventList = await _eventRepo.GetEventByNameAsync(name);
+            var eventList = await _unitOfWork.Events.GetEventByNameAsync(name);
 
             if (eventList.Count <= 0)
             {

@@ -54,7 +54,7 @@ namespace EventAPI.Repository
 
         public T GetById(string id)
         {
-            return _context.Set<T>().Find(id);
+            return _context.Set<T>().Find(id)!;
         }
 
         public async Task<T> GetByIdAsync(string id)
