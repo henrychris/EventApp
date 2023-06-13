@@ -10,6 +10,6 @@ namespace Shared.RequestModels
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string Role { get; set; } = RoleEnum.User.ToString();
+        public string Role { get; set; } = UserRoles.User.ToString();
     }
 }

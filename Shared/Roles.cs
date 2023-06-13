@@ -1,6 +1,6 @@
 ﻿namespace Shared
 {
-    public enum RoleEnum
+    public enum UserRoles
     {
         User,
         Admin

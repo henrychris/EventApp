@@ -24,12 +24,12 @@ namespace UserAPI.Data
                 (new Role
                 {
                     Id = 1,
-                    Name = RoleEnum.Admin.ToString()
+                    Name = UserRoles.Admin.ToString()
                 },
                 new Role
                 {
                     Id = 2,
-                    Name = RoleEnum.User.ToString()
+                    Name = UserRoles.User.ToString()
                 });
         }
 
