@@ -12,6 +12,7 @@ namespace EventAPI.Repository
 
         public EventRepository(DataContext dataContext) : base(dataContext)
         {
+            _dataContext = dataContext;
         }
 
         /// <summary>

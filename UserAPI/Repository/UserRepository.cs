@@ -12,6 +12,7 @@ namespace UserAPI.Repository
 
         public UserRepository(DataContext dataContext) : base(dataContext)
         {
+            _dataContext = dataContext;
         }
 
         /// <summary>
