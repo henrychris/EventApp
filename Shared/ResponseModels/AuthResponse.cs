@@ -1,4 +1,4 @@
-﻿namespace Shared
+﻿namespace Shared.ResponseModels
 {
     public class AuthResponse
     {

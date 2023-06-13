@@ -1,10 +1,12 @@
+using EventAPI.Data;
 using EventAPI.Interfaces;
-using EventAPI.Services;
+using EventAPI.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
 using Shared;
+using Shared.Repository;
 using System.Text;
 
 namespace EventAPI
@@ -37,6 +39,8 @@ namespace EventAPI
             context.Database.EnsureCreated();
 
             // other services
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEventRepository, EventRepository>();
 
             builder.Services.AddAuthentication(x =>

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shared.DTO
+namespace Shared.RequestModels
 {
     public class RegisterRequest
     {
