@@ -42,7 +42,7 @@ namespace UserAPI.Services
 
             if (isPasswordCorrect)
             {
-                return new ServiceResponse<AuthResponse> { Data = AuthResponse.NotFound, Message = "Incorrect password, try again.", Success = false };
+                return new ServiceResponse<AuthResponse> { Data = null, Message = "Incorrect password, try again.", Success = false };
             }
             var response = _mapper.Map<AuthResponse>(user);
             response.Token = _jwtManager.CreateAuthToken(user).Data;
