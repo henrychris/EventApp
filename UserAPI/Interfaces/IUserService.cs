@@ -1,7 +1,12 @@
-﻿namespace UserAPI.Interfaces
+﻿using Shared.ResponseModels;
+using Shared;
+
+namespace UserAPI.Interfaces
 {
     public interface IUserService
     {
-        public Task<bool> VerifyUserPasswordAsync(string email, string password);
+        Task<ServiceResponse<User>> AddUserAsync(User user);
+        Task<bool> VerifyUserPasswordAsync(string email, string password);
+        Task<ServiceResponse<User>> FundWalletAsync(string userId, decimal amount);
     }
 }
