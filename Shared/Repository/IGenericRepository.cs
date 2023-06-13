@@ -18,5 +18,6 @@ namespace Shared.Repository
         Task RemoveAsync(T entity);
         void RemoveRange(IEnumerable<T> entities);
         Task RemoveRangeAsync(IEnumerable<T> entities);
+        void Update(T entity);
     }
 }

@@ -81,6 +81,11 @@ namespace UserAPI.Repository
         {
             await Task.Run(() => _context.Set<T>().RemoveRange(entities));
         }
+
+        public void Update(T entity)
+        {
+            _context.Set<T>().Update(entity);
+        }
     }
 
 }
