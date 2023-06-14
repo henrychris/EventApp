@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
 using Shared;
+using Shared.Filters;
 using Shared.Repository;
 using System.Text;
 
@@ -38,10 +39,17 @@ namespace EventAPI
             using var context = new DataContext(config);
             context.Database.EnsureCreated();
 
-            // other services
+            // Repositories
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEventRepository, EventRepository>();
+
+            // Filters
+            builder.Services.AddScoped<RequiredRolesFilter>(p =>
+            {
+                var allowedRoles = UserRoleStrings.AllRoles;
+                return new RequiredRolesFilter(allowedRoles);
+            });
 
             builder.Services.AddAuthentication(x =>
             {

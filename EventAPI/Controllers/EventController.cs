@@ -1,10 +1,14 @@
 ﻿using EventAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Filters;
+using Shared;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EventAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EventController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -15,6 +19,7 @@ namespace EventAPI.Controllers
         }
 
         [HttpGet("GetAllEvents")]
+        [RequiredRolesFilter(UserRoleStrings.Admin)]
         public async Task<IActionResult> GetAllEvents()
         {
             return Ok(await _unitOfWork.Events.GetAllAsync());

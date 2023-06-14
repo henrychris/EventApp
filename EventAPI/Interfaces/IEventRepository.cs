@@ -8,7 +8,7 @@ namespace EventAPI.Interfaces
         Task<List<Event>> GetEventByNameAsync(string name);
         Task<bool> CheckIfEventExists(string id);
 
-        /* TODO:
+        /* TODO: read more
          * Consider adding a method to the interface that allows you to 
          * retrieve all events that match a given set of criteria. 
          * This can be useful if you want to retrieve all events 
