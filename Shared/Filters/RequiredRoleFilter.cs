@@ -32,8 +32,8 @@ namespace Shared.Filters
 
             if (!hasAllowedRole)
             {
-                // User does not have any of the allowed roles, return forbidden result
-                context.Result = new ForbidResult();
+                // User does not have any of the allowed roles, return NotFound result
+                context.Result = new NotFoundResult();
             }
         }
     }

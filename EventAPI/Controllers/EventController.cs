@@ -43,7 +43,7 @@ namespace EventAPI.Controllers
 
             if (eventList.Count <= 0)
             {
-                return BadRequest(eventList);
+                return NotFound(eventList);
             }
             return Ok(eventList);
         }

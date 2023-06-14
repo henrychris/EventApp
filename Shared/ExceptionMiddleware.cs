@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Shared
 {
@@ -27,6 +22,9 @@ namespace Shared
             }
             catch (Exception ex)
             {
+                // TODO get the current service running 
+                // use a switch case for exception type to determine the error message returned.
+
                 _logger.LogError(ex.Message, ex.StackTrace!);
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
