@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserEventsAPI", "UserEvents
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{54532532-FF2C-4D22-BA77-CDDEA5014A5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAPI-Tests", "EventAPI-Tests\EventAPI-Tests.csproj", "{8D0E6A56-E417-4FC4-B279-292782197B90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventApp-Tests", "EventAPI-Tests\EventApp-Tests.csproj", "{8D0E6A56-E417-4FC4-B279-292782197B90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
