@@ -40,7 +40,7 @@ namespace UserAPI.Services
             }
             var isPasswordCorrect = _hasher.VerifyPassword(loginRequest.Password, user.PasswordHash, user.PasswordSalt);
 
-            if (isPasswordCorrect)
+            if (!isPasswordCorrect)
             {
                 return new ServiceResponse<AuthResponse> { Data = null, Message = "Incorrect password, try again.", Success = false };
             }
