@@ -4,9 +4,9 @@ namespace Shared.RequestModels
 {
     public class RegisterRequest
     {
-        [Required]
+        [Required, StringLength(50)]
         public string FirstName { get; set; } = string.Empty;
-        [Required]
+        [Required, StringLength(50)]
         public string LastName { get; set; } = string.Empty;
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
