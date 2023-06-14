@@ -61,11 +61,16 @@ namespace UserAPI.Services
             var user = await _unitOfWork.Users.GetByIdAsync(userId);
 
             if (user == null)
-                return new ServiceResponse<User> { Message = "Credit failed. User Not Found.", Success = false, Data = User.NotFound };
+                return new ServiceResponse<User> { Message = "User Not Found.", Success = false, Data = User.NotFound };
 
             // The default, or NotFound user is an empty object.
             else if (user == User.NotFound)
-                return new ServiceResponse<User> { Message = "User Not Found", Success = false, Data = User.NotFound };
+                return new ServiceResponse<User> { Message = "User Not Found.", Success = false, Data = User.NotFound };
+
+            if (amount == 0.00m)
+                return new ServiceResponse<User> { Message = "Amount cannot be zero.", Success = false, Data = user };
+            if (amount < 0.00m)
+                return new ServiceResponse<User> { Message = "Amount cannot be negative.", Success = false, Data = user };
 
             user.WalletBalance += amount;
             await _unitOfWork.CompleteAsync();
