@@ -18,13 +18,14 @@ namespace EventAPI.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [AllowAnonymous]
         [HttpGet("GetAllEvents")]
-        [RequiredRolesFilter(UserRoleStrings.Admin)]
         public async Task<IActionResult> GetAllEvents()
         {
             return Ok(await _unitOfWork.Events.GetAllAsync());
         }
 
+        [AllowAnonymous]
         [HttpGet("GetEventById")]
         public async Task<IActionResult> GetEventById(string id)
         {
@@ -36,6 +37,7 @@ namespace EventAPI.Controllers
             return Ok(eventModel);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetEventByName")]
         public async Task<IActionResult> GetEventByName(string name)
         {
