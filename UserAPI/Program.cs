@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
 using Shared;
+using Shared.Filters;
 using Shared.Repository;
 using System.Text;
 using UserAPI.Data;
@@ -45,7 +46,14 @@ namespace UserAPI
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddSingleton<IJwtManager>(x => new JwtManager(settings!.Secret));
-            
+
+            // Filters
+            builder.Services.AddScoped(p =>
+            {
+                var allowedRoles = UserRoleStrings.AllRoles;
+                return new RequiredRolesFilter(allowedRoles);
+            });
+
             builder.Services.AddAuthentication(x =>
             {
                 // need to understand how this works

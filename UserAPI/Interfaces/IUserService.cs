@@ -8,5 +8,6 @@ namespace UserAPI.Interfaces
         Task<ServiceResponse<User>> AddUserAsync(User user);
         Task<bool> VerifyUserPasswordAsync(string email, string password);
         Task<ServiceResponse<User>> FundWalletAsync(string userId, decimal amount);
+        Task<ServiceResponse<User>> UpdateUserAsync(string id, UpdateUserRequest user);
     }
 }

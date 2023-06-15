@@ -42,7 +42,7 @@ namespace UserAPI.Repository
         /// <returns>Returns user details if found, else returns a default user</returns>
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            return await _dataContext.Users.FirstOrDefaultAsync(c => c.Email == email) ?? User.NotFound;
+            return await _dataContext.Users.FirstOrDefaultAsync(c => c.Email == email);
         }
 
         public new async Task<IEnumerable<object>> GetAllAsync()

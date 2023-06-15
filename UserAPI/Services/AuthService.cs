@@ -34,7 +34,7 @@ namespace UserAPI.Services
         {
             var user = await _unitOfWork.Users.GetUserByEmailAsync(loginRequest.Email);
 
-            if (user == User.NotFound)
+            if (user == null)
             {
                 return new ServiceResponse<AuthResponse> { Data = AuthResponse.NotFound, Message = $"Email or Password incorrect.", Success = false };
             }

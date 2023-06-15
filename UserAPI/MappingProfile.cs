@@ -11,6 +11,7 @@ namespace UserAPI
         {
             CreateMap<RegisterRequest, User>();
             CreateMap<User, AuthResponse>();
+            CreateMap<User, UserDTO>();
         }
     }
 }

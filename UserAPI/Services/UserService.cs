@@ -23,14 +23,29 @@ namespace UserAPI.Services
         public async Task<ServiceResponse<User>> AddUserAsync(User user)
         {
             if (user == null)
-                return new ServiceResponse<User> { Success = false, Message = "Failed to Add User.", Data = User.NotFound };
+                return new ServiceResponse<User> { Success = false, Message = "Failed to Add User.", Data = null };
             
             else if (await _unitOfWork.Users.CheckIfUserExistsAsync(user.Email))
-                return new ServiceResponse<User> { Message = "User already exists.", Success = false, Data = User.NotFound };
+                return new ServiceResponse<User> { Message = "User already exists.", Success = false, Data = null };
 
             await _unitOfWork.Users.AddAsync(user);
             await _unitOfWork.CompleteAsync();
             return new ServiceResponse<User> { Message = "User Added.", Success = true, Data = user };
+        }
+
+        public async Task<ServiceResponse<User>> UpdateUserAsync(string id, UpdateUserRequest user)
+        {
+            var userToUpdate = await _unitOfWork.Users.GetByIdAsync(id);
+            if (userToUpdate == null)
+                return new ServiceResponse<User> { Message = "User Not Found.", Success = false, Data = null };
+
+            userToUpdate.FirstName = user.FirstName ?? userToUpdate.FirstName;
+            userToUpdate.LastName = user.LastName ?? userToUpdate.LastName;
+            userToUpdate.Email = user.Email ?? userToUpdate.Email;
+
+            _unitOfWork.Users.Update(userToUpdate);
+            await _unitOfWork.CompleteAsync();
+            return new ServiceResponse<User> { Message = "User Updated.", Success = true, Data = null };
         }
 
         /// <summary>
@@ -61,11 +76,7 @@ namespace UserAPI.Services
             var user = await _unitOfWork.Users.GetByIdAsync(userId);
 
             if (user == null)
-                return new ServiceResponse<User> { Message = "User Not Found.", Success = false, Data = User.NotFound };
-
-            // The default, or NotFound user is an empty object.
-            else if (user == User.NotFound)
-                return new ServiceResponse<User> { Message = "User Not Found.", Success = false, Data = User.NotFound };
+                return new ServiceResponse<User> { Message = "User Not Found.", Success = false, Data = null };
 
             if (amount == 0.00m)
                 return new ServiceResponse<User> { Message = "Amount cannot be zero.", Success = false, Data = user };
