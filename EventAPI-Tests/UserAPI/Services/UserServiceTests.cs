@@ -95,7 +95,7 @@ namespace EventAPI_Tests.UserAPI.Services
 
             // Act
             var response = await _userService.FundWalletAsync(user.Id, amount);
-            
+
             // Assert
             Assert.That(response.Success, Is.True);
             Assert.That(response.Message, Is.EqualTo(expectedMessage));
@@ -191,5 +191,103 @@ namespace EventAPI_Tests.UserAPI.Services
             Assert.That(response.Data.WalletBalance, Is.EqualTo(decimal.MaxValue));
             Assert.That(response.Data, Is.EqualTo(user));
         }
+
+        [Test]
+        public async Task UpdateUserAsync_WithValidIdAndUserData_ReturnsSuccessfulResponse()
+        {
+            // Arrange
+            string userId = "123";
+            var updateUserRequest = new UpdateUserRequest
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "john.doe@example.com"
+            };
+            var userToUpdate = new User
+            {
+                Id = userId,
+                FirstName = "OldFirstName",
+                LastName = "OldLastName",
+                Email = "old.email@example.com"
+            };
+            _unitOfWorkMock.Setup(u => u.Users.GetByIdAsync(userId)).ReturnsAsync(userToUpdate);
+
+            // Act
+            var response = await _userService.UpdateUserAsync(userId, updateUserRequest);
+
+            // Assert
+            Assert.That(response.Success, Is.True);
+            Assert.That(response.Message, Is.EqualTo("User Updated."));
+            Assert.That(response.Data, Is.Null);
+
+            Assert.That(userToUpdate.FirstName, Is.EqualTo(updateUserRequest.FirstName));
+            Assert.That(userToUpdate.LastName, Is.EqualTo(updateUserRequest.LastName));
+            Assert.That(userToUpdate.Email, Is.EqualTo(updateUserRequest.Email));
+
+            _unitOfWorkMock.Verify(u => u.CompleteAsync(), Times.Once);
+        }
+
+        [Test]
+        public async Task UpdateUserAsync_WithInvalidId_ReturnsFailedResponseWithInvalidIdMessage()
+        {
+            // Arrange
+            User? nullUser = null;
+            var invalidId = "invalid-id";
+            var updateUserRequest = new UpdateUserRequest
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "john@example.com"
+            };
+            _unitOfWorkMock.Setup(u => u.Users.GetByIdAsync(invalidId))!.ReturnsAsync(nullUser);
+            // Act
+            var response = await _userService.UpdateUserAsync(invalidId, updateUserRequest);
+
+            // Assert
+            Assert.That(response.Success, Is.False);
+            Assert.That(response.Message, Is.EqualTo("User Not Found."));
+            Assert.That(response.Data, Is.Null);
+            _unitOfWorkMock.Verify(u => u.Users.GetByIdAsync(invalidId), Times.Once);
+            _unitOfWorkMock.Verify(u => u.Users.Update(It.IsAny<User>()), Times.Never);
+            _unitOfWorkMock.Verify(u => u.CompleteAsync(), Times.Never);
+        }
+
+        [Test]
+        public async Task UpdateUserAsync_WithSameUserData_ReturnsSuccessfulResponseWithNoUpdates()
+        {
+            // Arrange
+            var userId = "user-id";
+            var existingUser = new User
+            {
+                Id = userId,
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "john@example.com"
+            };
+            var updateUserRequest = new UpdateUserRequest
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "john@example.com"
+            };
+            _unitOfWorkMock.Setup(u => u.Users.GetByIdAsync(userId)).ReturnsAsync(existingUser);
+
+            // Act
+            var response = await _userService.UpdateUserAsync(userId, updateUserRequest);
+
+            // Assert
+            Assert.That(response.Success, Is.True);
+            Assert.That(response.Message, Is.EqualTo("User Updated."));
+            Assert.IsNull(response.Data);
+            Assert.That(existingUser.FirstName, Is.EqualTo("John"));
+            Assert.That(existingUser.LastName, Is.EqualTo("Doe"));
+            Assert.That(existingUser.Email, Is.EqualTo("john@example.com"));
+
+            _unitOfWorkMock.Verify(u => u.Users.GetByIdAsync(userId), Times.Once);
+            _unitOfWorkMock.Verify(u => u.Users.Update(It.IsAny<User>()), Times.Once);
+            _unitOfWorkMock.Verify(u => u.CompleteAsync(), Times.Once);
+        }
+    
+        
     }
 }
