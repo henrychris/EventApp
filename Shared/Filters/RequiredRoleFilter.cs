@@ -3,6 +3,27 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Shared.Filters
 {
+    /// <summary>
+    /// Specifies that the decorated method requires certain roles for access.
+    /// This attribute works in conjunction with the Authorize Filter to check
+    /// if the user has the required role to access the endpoint.
+    /// </summary>
+    /// <remarks>
+    /// When applied to a method, the RequiredRolesFilter checks if the user is
+    /// authenticated. If not authenticated, an UnauthorizedResult is returned.
+    /// If the user is authenticated, it verifies if the user has any of the allowed roles.
+    /// If the user does not have any of the allowed roles, a NotFoundResult is returned.
+    /// </remarks>
+    /// <seealso cref="IAuthorizationFilter" />
+    /// <example>
+    /// <code>
+    /// [RequiredRolesFilter("Admin", "Moderator")]
+    /// public IActionResult SomeSecuredEndpoint()
+    /// {
+    /// // Endpoint logic here
+    /// }
+    /// </code>
+    /// </example>
     [AttributeUsage(AttributeTargets.Method)]
     public class RequiredRolesFilter : Attribute, IAuthorizationFilter
     {
