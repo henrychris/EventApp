@@ -45,7 +45,7 @@ namespace EventAPI
             builder.Services.AddScoped<IEventRepository, EventRepository>();
 
             // Filters
-            builder.Services.AddScoped<RequiredRolesFilter>(p =>
+            builder.Services.AddScoped(p =>
             {
                 var allowedRoles = UserRoleStrings.AllRoles;
                 return new RequiredRolesFilter(allowedRoles);
