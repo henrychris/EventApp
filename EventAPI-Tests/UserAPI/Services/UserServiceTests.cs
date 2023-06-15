@@ -58,7 +58,7 @@ namespace EventAPI_Tests.UserAPI.Services
             // Assert
             Assert.That(response.Success, Is.False);
             Assert.That(response.Message, Is.EqualTo("Failed to Add User."));
-            Assert.That(response.Data, Is.EqualTo(User.NotFound));
+            Assert.That(response.Data, Is.EqualTo(null));
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace EventAPI_Tests.UserAPI.Services
             // Assert
             Assert.That(response.Success, Is.False);
             Assert.That(response.Message, Is.EqualTo("User already exists."));
-            Assert.That(response.Data, Is.EqualTo(User.NotFound));
+            Assert.That(response.Data, Is.EqualTo(null));
         }
 
         [Test]
@@ -104,10 +104,11 @@ namespace EventAPI_Tests.UserAPI.Services
 
         [Test]
         public async Task FundWalletAsync_WithInvalidUserId_ReturnsUserNotFoundResponse()
-        { 
+        {
             // Arrange
+            User? user = null;
             var userId = "df2f2c1a-7a36-413b-9dac-6a138ed52b1a";
-            _unitOfWorkMock.Setup(u => u.Users.GetByIdAsync(userId)).ReturnsAsync(User.NotFound);
+            _unitOfWorkMock.Setup(u => u.Users.GetByIdAsync(userId))!.ReturnsAsync(user);
 
             // Act
             var response = await _userService.FundWalletAsync(userId, 1000.00m);
@@ -115,7 +116,7 @@ namespace EventAPI_Tests.UserAPI.Services
             // Assert
             Assert.That(response.Success, Is.False);
             Assert.That(response.Message, Is.EqualTo("User Not Found."));
-            Assert.That(response.Data, Is.EqualTo(User.NotFound));
+            Assert.That(response.Data, Is.EqualTo(null));
         }
 
         [Test]
@@ -139,9 +140,9 @@ namespace EventAPI_Tests.UserAPI.Services
 
             // Assert
             Assert.That(response.Success, Is.False);
-            Assert.That(response.Data.WalletBalance , Is.EqualTo(oldBalance));
             Assert.That(response.Message, Is.EqualTo(expectedMessage));
             Assert.That(response.Data, Is.EqualTo(user));
+            Assert.That(response.Data.WalletBalance, Is.EqualTo(oldBalance));
         }
 
         [Test]

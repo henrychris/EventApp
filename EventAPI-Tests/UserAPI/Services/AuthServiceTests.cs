@@ -74,7 +74,9 @@ namespace EventAPI_Tests.UserAPI.Services
                 Password = "password"
             };
 
-            _unitOfWorkMock.Setup(u => u.Users.GetUserByEmailAsync(loginRequest.Email)).ReturnsAsync(User.NotFound);
+            User? user = null;
+
+            _unitOfWorkMock.Setup(u => u.Users.GetUserByEmailAsync(loginRequest.Email))!.ReturnsAsync(user);
 
             // Act
             var response = await _authService.LoginAsync(loginRequest);
@@ -148,7 +150,7 @@ namespace EventAPI_Tests.UserAPI.Services
         public async Task RegisterAsync_WithNullRequest_ReturnsFailedResponse()
         {
             // Act
-            var response = await _authService.RegisterAsync(null);
+            var response = await _authService.RegisterAsync(null!);
 
             // Assert
             Assert.That(response.Success, Is.False);
